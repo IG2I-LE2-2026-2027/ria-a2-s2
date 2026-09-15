@@ -45,6 +45,45 @@ boucle(5,
 	function() {
 		trace("b2 compteur2:"+ compteur2++);
 	});
+	
+	
+// TODO : tous les arguments optionnels 
+// le passage par liste d'arguments ne fonctionne plus 
+// on ne peut discrimer une fonction pour savoir 
+// si c'est la première ou la seconde qui est fournie 
+// => On passe des objets JSON 
+// qui portent des noms de propriété 
+// indépendament de leur position dans la liste 
+
+
+var oDefault = {
+	periode : 5, 
+	traiter: function(){trace("traitement boucle");}, 
+	poursuivre: function(){return true;}
+} 
+
+function boucleV2(oConfig) {
+
+}
+
+boucleV2({}); 
+boucleV2({periode:2});
+boucleV2({	traiter:function(){
+						trace("foo")
+					},
+					periode:1
+});  
+
+compteur3 = 0; 
+boucleV2({	traiter:function(){
+						trace("foo")
+					},
+					poursuivre : function(){
+						if (compteur3++>5) return false; 
+						else return true; 
+					}
+});  
+
 	 
 </script>
 </head>
