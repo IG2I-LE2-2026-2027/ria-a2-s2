@@ -29,6 +29,7 @@ function boucle(iPeriode,fnCbTraitement,fnCbContinuer) {
 
 }
 
+/*
 compteur1=0;
 compteur2=0;
 
@@ -45,7 +46,7 @@ boucle(5,
 	function() {
 		trace("b2 compteur2:"+ compteur2++);
 	});
-	
+*/
 	
 // TODO : tous les arguments optionnels 
 // le passage par liste d'arguments ne fonctionne plus 
@@ -62,21 +63,64 @@ var oDefault = {
 	poursuivre: function(){return true;}
 } 
 
-function boucleV2(oConfig) {
+// fonction enrichir(oDefaut,oModif) qui renvoie un nouvel objet en ayant complété les propriétés absentes de l’objet de configuration par les valeurs de l’objet par défaut.
 
+function enrichir(oDefault,oModif) {
+	var res = {}; 
+	for (prop in oDefault) {
+		if (oModif[prop] != undefined) res[prop] = oModif[prop]; 
+		else res[prop] = oDefault[prop];
+	}
+	return res; 
+}
+
+function boucleV2(oConfig) {
+	// 1) Gestion des arguments : 
+	// savoir quels arguments utiliser
+	// entre ceux fournis et ceux optionnels présents 
+	// dans le comporement conventionnel
+	// SOLUTION : demander à réaliser un clonage 
+	// Clonage superficiel : Object.assign()
+	// Pb : clonage superficiel : si les valeurs sont des références
+	// les mêmes références sont dans l'objet cloné 
+	// clonage profond possible jQuery 
+	// var monNouvelObjet = JSON.parse(JSON.stringify(monObjet)); 
+	// Pb : ne marche pas pour les fonctions 
+	
+	/*
+	var oParams = oDefault; // Ceci est une prise de référence !!!
+	// PAS un clonage, PAS une duplication
+	// oParams est un nouveau nom pour oDefault
+	// les deux représentent le même espace mémoire !!  
+	
+	if (oConfig.periode != undefined) oParams.periode = oConfig.periode;
+	if (oConfig.traiter != undefined) oParams.traiter = oConfig.traiter;
+	if (oConfig.poursuivre != undefined) oParams.poursuivre = oConfig.poursuivre;
+	*/
+	
+	var oParams = enrichir(oDefault,oConfig);
+	// 2) exécuter le traitement prévu 
+	
+	var foo = function() {
+		if (oParams.poursuivre()) {
+			oParams.traiter(); 
+			window.setTimeout(foo,oParams.periode*1000);
+		}
+	}
+	foo();
 }
 
 boucleV2({}); 
 boucleV2({periode:2});
 boucleV2({	traiter:function(){
-						trace("foo")
+						trace("foo1")
 					},
 					periode:1
 });  
 
 compteur3 = 0; 
 boucleV2({	traiter:function(){
-						trace("foo")
+						trace("foo2")
 					},
 					poursuivre : function(){
 						if (compteur3++>5) return false; 
