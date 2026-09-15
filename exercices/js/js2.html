@@ -8,6 +8,18 @@ function boucle(iPeriode,fnCbTraitement,fnCbContinuer) {
 	// Objectif : déclencher un appel à la fonction fnCbTraitement
 	// toutes les iPeriode secondes, 
 	// tant que fnCbContinuer renvoie vrai
+	
+	var foo = function() {
+		// le scope de la fonction foo
+		// contient les var. locales de boucle 
+		// => il n'est plus nécessaire de les sauvegarder 
+		// en var. globales 
+		if (	(fnCbContinuer==undefined) || fnCbContinuer()) {
+			fnCbTraitement(); 
+			window.setTimeout(foo,iPeriode*1000);
+		}
+	}
+	foo();
 
 	// fnCbTraitement est une fonction de rappel ("CALLBACK")
 	// elle sera appelée plus tard
@@ -17,15 +29,21 @@ function boucle(iPeriode,fnCbTraitement,fnCbContinuer) {
 
 }
 
-compteur=0;
+compteur1=0;
+compteur2=0;
 
-boucle(5,
+boucle(3,
 	function() {
-		trace("compteur:"+ compteur++);
+		trace("b1 compteur1:"+ compteur1++);
 	},
 	function() {
-		if (compteur>5) return false;
+		if (compteur1>5) return false;
 		else return true;
+	});
+	 
+boucle(5,
+	function() {
+		trace("b2 compteur2:"+ compteur2++);
 	});
 	 
 </script>
