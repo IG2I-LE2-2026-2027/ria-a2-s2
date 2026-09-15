@@ -4,7 +4,7 @@ function trace(s) {
 	var j=0;
 	// que fait cette fonction ?
 	window.console && console.log(s);
-	console.log("j:" + j);
+	//console.log("j:" + j);
 	j++;
 	// if (window.console) {
 	// 	console.log(s);
@@ -91,21 +91,62 @@ var oJson = {
 	methode1 : function() {},
 	methode2 : function() {}
 };
-*/ 
+*/
 
-// TODO : var dbg = ???
-dbg.trace("1");
-dbg.trace("2");
-dbg.trace("3");
-dbg.trace("4");
-dbg.trace("5"); // ok 
-dbg.trace("6"); // rien ne doit s'afficher 
+
+
+function mkVarLocale(borne_max_interne) {
+	// borne_max_interne est un paramètre formel 
+	// donc une variable locale !! 
+	var compteur_interne=0; // locale à mkVarLocale
+	if (borne_max_interne == undefined)
+		borne_max_interne=5; 
+		
+	return {
+		trace : function(s) {
+			if (compteur_interne++<borne_max_interne) 
+				trace(s); 
+		},
+		reset : function() {compteur_interne=0;}, 
+		set : function(v) {compteur_interne = v; }, 
+		getCompteur : function() {return compteur_interne;}
+	};
+} 
+
+trace("test2");
+//var dbg = mkVarLocale(3);
+
+var dbg = (function (borne_max_interne) {
+	// borne_max_interne est un paramètre formel 
+	// donc une variable locale !! 
+	var compteur_interne=0; // locale à mkVarLocale
+	if (borne_max_interne == undefined)
+		borne_max_interne=5; 
+		
+	return {
+		trace : function(s) {
+			if (compteur_interne++<borne_max_interne) 
+				trace(s); 
+		},
+		reset : function() {compteur_interne=0;}, 
+		set : function(v) {compteur_interne = v; }, 
+		getCompteur : function() {return compteur_interne;}
+	};
+}) (3);
+
+
+dbg.trace("msg1");
+dbg.trace("msg2");
+dbg.trace("msg3");
+dbg.trace("msg4");
+dbg.trace("msg5"); // ok 
+dbg.trace("msg6"); // rien ne doit s'afficher 
 trace(dbg.getCompteur());
 // réinitialiser compteur 
 dbg.reset();
 trace(dbg.getCompteur());
 // Problème : l'accès au compteur est trop facile et donc dangereux 
-dbg.trace("7"); // ok
+dbg.trace("msg7"); // ok
 
 
 
