@@ -149,25 +149,86 @@ trace(dbg.getCompteur());
 dbg.trace("msg7"); // ok
 
 
-
-
+ 
 function show(refOrId,display) {
 	// affiche l'élément dont la référence ou l'id est fourni
 	// le paramètre display doit valoir block par défaut
+	if (typeof refOrId =="string") 
+		refOrId = document.getElementById(refOrId);
+		
+	if (display == undefined) display = "block";
+	
+	refOrId.style.display = display;
 }
 
 function hide(refOrId) {
 	// cache l'élément dont la référence ou l'id est fourni
+	if (typeof refOrId == "string") 
+		refOrId = document.getElementById(refOrId); 
+		
+	refOrId.style.display = "none";
 }
 
 function html(refOrId, val) {
 	// affecte une valeur à l'élément dont la référence ou l'id est fourni; si val n'est pas fourni, on renvoie son contenu
+	if (typeof refOrId =="string") 
+		refOrId = document.getElementById(refOrId); 
+		
+	if (val == undefined) return refOrId.innerHTML;
+	else {
+		refOrId.innerHTML = val;
+	}
 }
 
 function val(refOrId, val) {
 	// affecte une valeur à l'élément dont la référence ou l'id est fourni; si val n'est pas fourni, on renvoie son contenu
 	// l'élément est un champ de formulaire
 	// la fonction doit pouvoir manipuler l'état des champs de type checkbox et radio 
+	if (typeof refOrId =="string") 
+		refOrId = document.getElementById(refOrId); 
 	
+	if (val == undefined) {
+		if ((refOrId.type=="checkbox") || (refOrId.type=="radio"))
+			return refOrId.checked;
+		else 
+			return refOrId.value;
+	}
+	else {
+		if ((refOrId.type=="checkbox") || (refOrId.type=="radio"))
+			return refOrId.checked = val;
+		else 
+			return refOrId.value = val;
+	}
 }
+
+
+// .innerHTML .value .style.display
+// typeof 
+// test à undefined pour arguments optionnels 
+// test du type à radio|checkbox 
+// utiliser des fonctions bloquantes (alert, confirm, prompt..) pour les tests 
+
+
+// TODO : gérer les redraw.. A suivre 
+function tests() {
+	alert("cacher ?"); 
+	hide("lediv"); 
+	window.setTimeout(
+		function(){
+			alert("afficher ?");
+			show("lediv");
+			alert("changer ?");
+			html("lediv","Changé !!"); 
+		}, 0); 
+}
+
 </script>
+
+<body>
+	<div id="lediv"> lediv </div>
+	<input type="button" id="lebtn" value="lebtn" />
+	<input type="radio" id="lerd" />
+	<input type="checkbox" id="lecb" />
+</body>
+
+

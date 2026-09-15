@@ -1,0 +1,28 @@
+<script src="utils.js"> 
+	// pas de code ici : ne sera pas exécuté 
+</script>
+
+<script>
+dbg.trace("msg1");
+dbg.trace("msg2");
+dbg.trace("msg3");
+dbg.trace("msg4");
+dbg.trace("msg5"); // ok 
+dbg.trace("msg6"); // rien ne doit s'afficher 
+trace(dbg.getCompteur());
+// réinitialiser compteur 
+dbg.reset();
+trace(dbg.getCompteur());
+// Problème : l'accès au compteur est trop facile et donc dangereux 
+dbg.trace("msg7"); // ok
+
+</script>
+
+<body>
+	<div id="lediv"> lediv </div>
+	<input type="button" id="lebtn" value="lebtn" />
+	<input type="radio" id="lerd" />
+	<input type="checkbox" id="lecb" />
+</body>
+
+
