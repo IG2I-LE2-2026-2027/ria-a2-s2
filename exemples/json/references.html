@@ -1,0 +1,75 @@
+<style>
+.code {
+	padding:1px;
+	margin:3px;
+	border: 1px solid black;
+}
+
+pre {
+background-color:lightgrey;
+}
+</style>
+
+<h1>Manipulation d'objets en javascript</h1>
+
+<ul>
+<li>Contrairement aux types scalaires, le passage de param&egrave;tres de type Objet se fait par r&eacute;f&eacute;rence ! </li>
+</ul>
+
+<pre>
+function fonctionManipulantObjet(ob) {
+	// Le passage d'objets aux fonctions se fait par REFERENCE !!
+	ob.champ1 = "valChamp1ModifieeDansLaFonction";
+}
+
+var unObjet = {
+	"champ1":"valChamp1", 
+	"champ2":"valChamp2", 
+};
+
+document.write("val initiale du champ1 : " + unObjet.champ1);
+fonctionManipulantObjet(unObjet);
+document.write("Apres l'appel, val du champ1 : " + unObjet.champ1);
+</pre>
+
+
+<script>
+function fonctionManipulantObjet(ob) {
+	// Le passage d'objets aux fonctions se fait par REFERENCE !!
+	ob.champ1 = "valChamp1ModifieeDansLaFonction";
+}
+
+var unObjet = {
+	"champ1":"valChamp1", 
+	"champ2":"valChamp2", 
+};
+
+document.write("val initiale du champ1 : " + unObjet.champ1 +"<br/>");
+fonctionManipulantObjet(unObjet);
+document.write("Apres l'appel, val du champ1 : " + unObjet.champ1+"<br/>");
+</script>
+
+<ul>
+<li>L'affectation d'objets entre eux revient aussi &agrave; effectuer un passage par r&eacute;f&eacute;rence !</li>
+</ul>
+
+<pre>
+// Attention : ce n'est pas un clonage ni une copie !
+// On prend ici une REFERENCE ! 
+var unAutre = unObjet; 
+
+unAutre.champ1 = "valChamp1ModifieeDansLAutreObjet";
+document.write("val actuelle du champ1 : " + unObjet.champ1);
+</pre>
+
+<script>
+// Attention : ce n'est pas un clonage ni une copie !
+// On prend ici une référence ! 
+var unAutre = unObjet; 
+
+unAutre.champ1 = "valChamp1ModifieeDansLAutreObjet";
+document.write("val actuelle du champ1 : " + unObjet.champ1);
+
+</script>
+
+

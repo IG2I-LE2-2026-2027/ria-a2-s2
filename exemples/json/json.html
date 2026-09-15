@@ -1,0 +1,118 @@
+<style>
+.code {
+	padding:1px;
+	margin:3px;
+	border: 1px solid black;
+}
+
+pre {
+background-color:lightgrey;
+}
+</style>
+
+<h1>Construction d'objets JSON en javascript </h1>
+
+<h3>A partir d'une chaine de caract&egrave;res : </h3>
+
+<pre>
+var chaineJson = '{"promo":"2016-2017","etudiants":[{"prenom":"Jean-Pierre","nom":"Bourey"},{"prenom":"Thomas","nom":"Bourdeaud\'huy"}]}';
+objetJson = JSON.parse(chaineJson);
+document.write(objetJson.promo);
+</pre>
+
+<script>
+var chaineJson = '{"promo":"2016-2017","etudiants":[{"prenom":"Jean-Pierre","nom":"Bourey"},{"prenom":"Thomas","nom":"Bourdeaud\'huy"}]}';
+objetJson = JSON.parse(chaineJson);
+document.write(objetJson.promo);
+</script>
+
+<hr />
+<h3> Directement : </h3>
+
+<pre>
+var monObjet = {"promo":"2016-2017","etudiants":[{"prenom":"Jean-Pierre","nom":"Bourey"},{"prenom":"Thomas","nom":"Bourdeaud'huy"}]}; 
+document.write(monObjet.promo);
+</pre>
+
+<script>
+var monObjet = {"promo":"2016-2017","etudiants":[{"prenom":"Jean-Pierre","nom":"Bourey"},{"prenom":"Thomas","nom":"Bourdeaud'huy"}]}; 
+document.write(monObjet.promo);
+</script>
+
+
+<hr />
+<h3>On peut afficher les objets JSON sur la console et visualiser les variables globales dans l'onglet DOM</h3>
+
+<pre>
+console.log(monObjet);
+</pre>
+
+<script>
+console.log(monObjet);
+</script>
+
+
+
+<hr />
+<h3>Les tableaux dans les objets JSON peuvent &ecirc;tre parcourus de mani&egrave;re classique. On utilise la propri&eacute;t&eacute; <span class="code">length</span> des instances de tableaux pour r&eacute;cup&eacute;rer leur taille :</h3>
+
+<pre>
+for(i=0;i&lt;objetJson.etudiants.length;i++){
+	document.write(objetJson.etudiants[i].prenom + "&lt;br />");
+}
+</pre>
+
+<script>
+for(i=0;i<objetJson.etudiants.length;i++){
+	document.write(objetJson.etudiants[i].prenom + "<br />");
+}
+</script>
+
+<hr />
+<h1>Dualit&eacute; Objet / Tableau en javascript </h1>
+
+<ul>
+<li>Dans le paradigme objet, la notation point&eacute;e permet d'acc&eacute;der aux propri&eacute;t&eacute;s de l'objet. </li>
+<li>En javascript, il est &eacute;galement possible d'acc&eacute;der aux propri&eacute;t&eacute;s d'un objet &agrave; l'aide de l'op&eacute;rateur [] : <br />
+<span class="code">objet.propri&eacute;t&eacute; &lt;=&gt; objet["propri&eacute;t&eacute;"]  &lt;=&gt; objet[variable_valant_le_nom_de_la_propriete]</span> </li>
+<li>L'int&eacute;r&ecirc;t de cette seconde forme est que le nom de la propri&eacute;t&eacute; est une cha&icirc;ne de caract&egrave;res et non un identificateur !</li>
+<li>On peut donc produire du code param&eacute;trable sans savoir au moment du d&eacute;veloppement &agrave; quelle propri&eacute;t&eacute; on acc&egrave;de</li>
+</ul>
+
+<pre>
+monObjet.nouvellePropriete = "valeur";
+var nomProp="nouvellePropriete"; 
+document.write(monObjet.nouvellePropriete + " / " + monObjet[nomProp] + " / " + monObjet["nouvellePropriete"]); 
+</pre>
+
+<script>
+	monObjet.nouvellePropriete = "valeur";
+	var nomProp="nouvellePropriete"; 
+	document.write(monObjet.nouvellePropriete + " / " + monObjet[nomProp] + " / " + monObjet["nouvellePropriete"]);  
+</script>
+
+<hr />
+
+<h1>Structure de contr&ocirc;le pour le parcours d'un objet JSON</h1>
+
+Le javascript propose une solution pour parcourir toutes les propri&eacute;t&eacute;s d'un objet, gr&acirc;ce &agrave; la boucle 
+<span class="code">for (prop in objet) {}</span> : 
+<br />
+<ul>
+<li>La boucle parcourt toutes les propri&eacute;t&eacute;s de l'objet "myObject" </li>
+<li>La variable prop contient le nom de la propri&eacute;t&eacute; </li>
+<li>Dans myObject[prop] on trouve le contenu de la propri&eacute;t&eacute;</li>
+</ul>
+
+<pre>
+for (prop in monObjet) {
+	document.write(prop + " = " + monObjet[prop] + "&lt;br />");
+}
+</pre>
+
+<script>
+for (prop in monObjet) {
+	document.write(prop + " = " + monObjet[prop] + "<br />");
+}
+</script>
+

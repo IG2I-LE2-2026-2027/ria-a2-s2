@@ -1,0 +1,74 @@
+<script type="text/javascript">
+
+var request = false;
+
+function envoiRequete(type,url,donnees,callback)
+{
+	request = new XMLHttpRequest(); 
+
+	if (type=='GET') 
+	{
+		request.open("GET", url+"?"+donnees, true);
+		donnees=null;
+	}
+	else 
+	{
+		request.open("POST", url, true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.setRequestHeader("Content-length", donnees.length);
+		request.setRequestHeader("Connection", "close");
+	}
+
+	request.onreadystatechange = callback;
+	request.send(donnees);
+}
+
+function traiteReponse()
+{
+	//alert(request.readyState);	// à décommenter
+	if (request.readyState == 4) 
+	{
+	    if (request.status == 200) 
+	    {
+			reponse = request.responseText;
+	    }
+	}
+} 
+
+function envoyer(refBtn)
+{
+	var refCle = document.getElementById("cle");
+	var type;
+
+}
+
+</script>
+
+<input type="text" id="cle"/>
+<input type="button" value="envoi GET"/>
+<input type="button" value="envoi POST"/>
+
+<div id="reponse">
+</div>
+
+<textarea cols="40" rows="10">
+Pour vous convaincre que c'est bien asynchrone, vous pouvez editer ce champ: il ne sera pas remis &agrave; jour !
+</textarea>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

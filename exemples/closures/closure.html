@@ -1,0 +1,146 @@
+<style>
+.code {
+	padding:1px;
+	margin:3px;
+	border: 1px solid black;
+}
+
+pre {
+background-color:lightgrey;
+}
+</style>
+
+
+<h1>Focus sur les fermetures (aka "closure")
+</h1>
+<a href="http://www.w3schools.com/js/js_function_closures.asp">http://www.w3schools.com/js/js_function_closures.asp</a>
+
+
+<pre>
+var compteur=0; 
+
+function trace(s) {
+	document.write(compteur + ": " + s + "&lt;br /&gt;");
+	compteur++;
+} 
+
+function mkTrace() {
+	var compteur_interne=0;
+	return function(s){
+		document.write(compteur_interne + " " + s + "&lt;br /&gt;");
+		compteur_interne++;
+	}
+}
+</pre>
+
+<script>
+var compteur=0; 
+
+function trace(s) {
+	document.write(compteur + ": " + s + "<br />");
+	compteur++;
+} 
+
+function mkTrace() {
+	var compteur_interne=0;
+	return function(s){
+		document.write(compteur_interne + ": " + s + "<br />");
+		compteur_interne++;
+	}
+}
+</script>
+
+<ul>
+<li>Chaque appel à la fonction mkTrace génère un scope qui ne disparaît pas après la fin de l'exécution de la fonction. </li>
+<li>Chacune des fonctions trace<i> manipule son propre scope qui contient une variable compteur_interne différente.</li>
+</ul>
+
+<pre>
+var trace2 = mkTrace(); 
+var trace3 = mkTrace(); 
+
+trace2("appel 1 (trace 2)");
+trace2("appel 2 (trace 2)");
+trace3("appel 1 (trace 3)");
+trace3("appel 2 (trace 3)");
+trace3("appel 3 (trace 3)");
+trace2("appel 3 (trace 2)");
+</pre>
+
+
+<script>
+var trace2 = mkTrace(); 
+var trace3 = mkTrace(); 
+
+trace2("appel 1 (trace 2)");
+trace2("appel 2 (trace 2)");
+trace3("appel 1 (trace 3)");
+trace3("appel 2 (trace 3)");
+trace3("appel 3 (trace 3)");
+trace2("appel 3 (trace 2)");
+</script>
+
+
+
+<ul>
+<li>On peur renvoyer un objet contenant plusieurs méthodes ayant un scope commun </li>
+</ul>
+
+
+<pre>
+
+function mkTrace2() {
+	var compteur_interne=0;
+	return {
+		trace : function(s){
+			document.write(compteur_interne + ": " + s + "&lt;br /&gt;");
+			compteur_interne++;
+		}, 
+		reset : function(){compteur_interne=0;},
+		getCompteur : function(){return compteur_interne;},
+		setCompteur : function(value){compteur_interne = value;},
+	}; 
+}
+
+var oTrace = mkTrace2(); 
+oTrace.trace("appel 1");
+oTrace.trace("appel 2");
+document.write("Après deux appels, compteur vaut " + oTrace.getCompteur() + "&lt;br /&gt;"); 
+oTrace.reset();
+document.write("Après reset, compteur vaut " + oTrace.getCompteur() + "&lt;br /&gt;");
+oTrace.trace("appel 3");
+oTrace.setCompteur(5);
+document.write("Après setcompteur, compteur vaut " + oTrace.getCompteur() + "&lt;br /&gt;");
+oTrace.trace("appel 4");
+</pre>
+
+<script>
+
+function mkTrace2() {
+	var compteur_interne=0;
+	return {
+		trace : function(s){
+			document.write(compteur_interne + ": " + s + "<br />");
+			compteur_interne++;
+		}, 
+		reset : function(){compteur_interne=0;},
+		getCompteur : function(){return compteur_interne;},
+		setCompteur : function(value){compteur_interne = value;},
+	}; 
+}
+
+var oTrace = mkTrace2(); 
+oTrace.trace("appel 1");
+oTrace.trace("appel 2");
+document.write("Après deux appels, compteur vaut " + oTrace.getCompteur() + "<br />"); 
+oTrace.reset();
+document.write("Après reset, compteur vaut " + oTrace.getCompteur() + "<br />");
+oTrace.trace("appel 3");
+oTrace.setCompteur(5);
+document.write("Après setcompteur, compteur vaut " + oTrace.getCompteur() + "<br />");
+oTrace.trace("appel 4");
+
+
+</script>
+
+

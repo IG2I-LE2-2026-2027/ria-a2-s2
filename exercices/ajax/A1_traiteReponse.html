@@ -1,0 +1,25 @@
+<script type="text/javascript">
+
+function traiteReponse()
+{
+	//alert(request.readyState);	// à décommenter
+	if (request.readyState == 4) 
+	{
+	    if (request.status == 200) 
+	    {
+	    	var reponse = request.responseText;
+			alert("reponse recue:" + reponse);        
+	    }
+	}
+} 
+
+request = new XMLHttpRequest(); 
+request.onreadystatechange = traiteReponse; 
+request.open('GET', "A1_data.txt", true);
+request.send(null);
+
+</script>
+
+
+<html>
+</html>

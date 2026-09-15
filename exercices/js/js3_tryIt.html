@@ -1,0 +1,72 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+
+<style>
+#code
+{
+	position:absolute;
+	display:block;
+	width:48%;
+	left:0px;
+	border:1px solid black;
+	padding:2px;
+	margin:2px;
+	top:50px;
+	height:90%;
+}
+
+#rendu
+{
+	position:absolute;
+	display:block;
+	width:48%;
+	right:0px;
+	border:1px solid black;
+	padding:2px;
+	margin:2px;
+	top:50px;
+	height:90%;
+	
+}
+
+#inputs
+{
+	text-align:center;
+	background-color:lightgrey;
+}
+</style>
+
+<script src="utils.js">
+// définit html(),val(), show(), hide()
+</script>
+
+<script src="boucle.js">
+// définit boucle()
+</script>
+
+<script type="text/javascript">
+function maj() {
+	// TODO : copie le code depuis le textarea "code" vers le div "rendu"
+}
+
+function init()
+{
+	console.log("Code a completer a l'aide de la librairie de fonctions 'boucle'");
+}
+
+</script>
+</head>
+<body onload="init();">
+
+<div id="inputs">
+	<input value="actualiser le rendu" type="button">
+	<input id="cb" type="checkbox">
+	<label for="cb">automatiquement</label>
+</div>
+
+<textarea id="code">&lt;h1&gt; Un paragraphe &lt;/h1&gt;
+</textarea>
+
+<div id="rendu">
+</div>
+</body></html>
