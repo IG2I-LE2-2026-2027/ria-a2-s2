@@ -1,5 +1,7 @@
 <head>
 
+<script src="utils.js"> </script>
+
 <script>
 
 function boucle(iPeriode,fnCbTraitement,fnCbContinuer) {
@@ -14,6 +16,18 @@ function boucle(iPeriode,fnCbTraitement,fnCbContinuer) {
 	// rendre le 3ème argument optionnel
 
 }
+
+compteur=0;
+
+boucle(5,
+	function() {
+		trace("compteur:"+ compteur++);
+	},
+	function() {
+		if (compteur>5) return false;
+		else return true;
+	});
+	 
 </script>
 </head>
 <body>
