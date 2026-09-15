@@ -1,16 +1,106 @@
 <script>
 
 function trace(s) {
+	var j=0;
 	// que fait cette fonction ?
 	window.console && console.log(s);
+	console.log("j:" + j);
+	j++;
+	// if (window.console) {
+	// 	console.log(s);
+	//}
+	
+	// falsy : 
+	// une propriété inexistante dans un objet 
+	// le booléen false
+	// la chaine vide 
+	// la chaine "0"  
+	
+	// Pour tester type et valeur 
+	// utiliser l'opérateur triple : ===
 }
 
+var compteur=0;
 function debug(s) {
+	var MAX=5; 
+	if (compteur++<MAX) trace(s); 
+	
+	// ici, i est globale !!! 
+	// systémariquement, déclarer vos variables AU DEBUT DES BLOCS !!
+	// hoisting :  
+	// questionner la portée des variables 
+	//for(i=0;i<MAX;i++) {
+	//	foo()
+	//}
+	// var i=2; // i va remonter, pas 2
 	// affiche un nombre de messages limité par un compteur
 	// affiche le compteur si s n'est pas fourni
-	// e.g. après 10 affichages, la fonction ne fait plus rien 
+	// e.g. après 5 affichages, la fonction ne fait plus rien 
 	// comment remettre à 0 le compteur ?   
 }
+
+// approche TDD : Test Driven Development 
+// Borne Max : 5 
+debug("1");
+debug("2");
+debug("3");
+debug("4");
+debug("5"); // ok 
+debug("6"); // rien ne doit s'afficher 
+// réinitialiser compteur 
+compteur=0;
+// Problème : l'accès au compteur est trop facile et donc dangereux 
+debug("7"); // ok 
+
+// TODO : ne plus permettre l'accès au compteur en dehors de la fonction debug 
+// SOLUTION : créer une variable *non globale* MAIS persistante 
+// qui ne perdra pas sa valeur entre deux appels : elle n'est pas locale à la fonction 
+// à laquelle la fonction debug aura accès
+// ==> Mise en place d'une "closure"
+// "fermeture" "enfermement" 
+
+// toute fonction définit un scope 
+// l'ensemble des variables qu'elle voit
+// Si on crée une fonction foo dans une fonction bar, 
+// la fonction foo a accès aux variables locales de la fonction bar 
+// y compris quand la fonction bar a terminé de s'exécuter 
+// tant qu'il existe une référence accessible vers la fonction foo 
+
+function bar () {
+	var i_bar = 2; 
+	var foo = function() {
+		// le scope de foo contient un accès à i_bar ! 
+		i_bar++; 
+		trace("i_bar:" + i_bar);
+	}
+	return foo; 
+}
+
+fooo = bar(); 
+
+// TODO : debugv2 qui crée un objet de débogage : debugv2 renvoie un objet JSON contenant plusieurs méthodes 
+// - dbg.trace(s) affichage limité par un compteur 
+// - dbg.reset() réinitialiser le compteur 
+// - dbg.set(v) affecte le compteur 
+// - dbg.getCompteur() qui renvoie la valeur du compteur 
+// ++ ajouter des méthodes de gestion de la borne MAX 
+
+// TODO : var dbg = ???
+dbg.trace("1");
+dbg.trace("2");
+dbg.trace("3");
+dbg.trace("4");
+dbg.trace("5"); // ok 
+dbg.trace("6"); // rien ne doit s'afficher 
+trace(dbg.getCompteur());
+// réinitialiser compteur 
+dbg.reset();
+trace(dbg.getCompteur());
+// Problème : l'accès au compteur est trop facile et donc dangereux 
+dbg.trace("7"); // ok
+
+
+
 
 function show(refOrId,display) {
 	// affiche l'élément dont la référence ou l'id est fourni
