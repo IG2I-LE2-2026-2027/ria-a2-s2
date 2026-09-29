@@ -1,6 +1,6 @@
 <?php
 
-$salles = array("Isabelle"=>"B7-104","Thomas"=>"C118");
+$salles = array("Isabelle"=>"202","Thomas"=>"201");
 $noms = array("Isabelle"=>"Le-Glaz","Thomas"=>"Bourdeaud'huy");
 
 if ((isset($_GET["cle"]) && isset($noms[$_GET["cle"]])))
