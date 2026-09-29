@@ -14,6 +14,7 @@ Il y en a déjà dans le sous-répertoire ressources
 	position:absolute;
 	right:5px;
 	top:2px;
+	display:none;
 }
 #saisie {
 	width:300px;height:30px;
@@ -30,6 +31,7 @@ Il y en a déjà dans le sous-répertoire ressources
 	left:0;
 	top:25px;
 	width:299px;
+	
 }
 #suggestions li {
 	display:block;
@@ -42,16 +44,59 @@ Il y en a déjà dans le sous-répertoire ressources
 }
 
 </style>
+
+<script src="js/utils.js"></script>
+<script>
+
+var lastContent=""; 
+
+// interaction 
+function annuler(contexte) {
+	//console.log(contexte); 
+	if (contexte.code == "Escape") {
+		hide("suggestions");
+		val("saisie","");
+	}
+}
+
+function saisir() {
+	console.log("texte : " + val("saisie"));
+	var contenu = val("saisie"); 
+	
+	if ((contenu != "") && (contenu != lastContent)) {
+		// si champ non vide 
+		// ET qu'il a été modifié 
+		// on affiche l'image de chargement
+		show("imgLoad"); 
+		// on cache les précédentes suggestions 
+		hide("suggestions");
+	}
+	
+	
+	if (contenu == "") {
+		hide("imgLoad"); 
+	}
+
+	lastContent = contenu;
+}
+
+function choisir(contexte) {
+	//console.log(contexte); 
+	val("saisie", html(contexte.target));
+	hide("suggestions");
+}
+
+</script>
 </head>
 
-<body>
+<body onkeyup="annuler(event)">
 <!-- structure --> 
 
 Du texte ... 
 <div id="conteneur">
-	<input type="text" id="saisie"/>
+	<input type="text" id="saisie" onkeyup="saisir()"/>
 	<img id="imgLoad" src="ressources/ajaxLoader.gif" />
-	<ul id="suggestions">
+	<ul id="suggestions" onclick="choisir(event)">
 		<li>Thibault</li>
 		<li>Thimoth&eacute;e</li> 
 		<li>Thomas</li>
