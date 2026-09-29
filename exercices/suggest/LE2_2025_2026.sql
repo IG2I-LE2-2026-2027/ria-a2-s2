@@ -38,67 +38,67 @@ CREATE TABLE `etudiants` (
 --
 
 
-INSERT INTO `etudiants` (`id`, `nom`, `prenom`) VALUES
-(1 ,'AYARI','Rayane'),			  
-(2 ,'BAZEGA','MohamedOthman'),		  
-(3 ,'BERQUIER','Raphaël'),		  
-(4 ,'BIENCOURT','Antonin'),	  
-(5 ,'BONNAFOUS','Martin'),
-(6 ,'CARON','Arthur'),
-(7 ,'CHALON','Louis'),
-(8 ,'CHATAKER','Ranya'),
-(9 ,'CHAUVET','Yann'),
-(10,'COMBLAT','Romain'),
-(11,'CZERYBA-DUEZ','Arthur'),
-(12,'DEGEZELLE','Eulalie'),
-(13,'DEHILES','Lara'),
-(14,'DELPONT','Louis'),
-(15,'DEMOUTIEZ','Erine'),
-(16,'DESVIGNE','Arthur'),
-(17,'DUBOIS','Eliott'),
-(18,'DUEZ','Yanis'),
-(19,'DUPIRE','Elias'),
-(20,'ELATOUANI','Meryem'),
-(21,'FAILLE','Axel'),
-(22,'FEUGERE','Chloé'),
-(23,'FORMISYN','Nathan'),
-(24,'HAKIM','Adam'),
-(25,'HECQUET','Alexis'),
-(26,'KUJAWA','Evan'),
-(27,'KUJAWA-CLEMENT','Mathian'),
-(28,'LAITEM','Robin'),
-(29,'LAMOUR','Julien'),
-(30,'LEFEBVRE','Nathan'),
-(31,'LESPAGNOL','Mateo'),
-(32,'LUCIANI','Marceau'),
-(33,'MAES','Adrien'),
-(34,'MAGNIEZ','Tom'),
-(35,'MAHMOUDI','Mohamed-Farouk'),
-(36,'MARREAU','Léo'),
-(37,'MELLIN','Noa'),
-(38,'MEUROT','Mathéo'),
-(39,'MIFDAL','Youssra'),
-(40,'MORDACQUE','Théophile'),
-(41,'NIEWRZÉDA','Luca'),
-(42,'PADÉ','Lilian'),
-(43,'PAVLOVIC','Baptiste'),
-(44,'POPRAWKA','Mathis'),
-(45,'POTTIER','Axel'),
-(46,'POUANT','Arthur'),
-(47,'QUETTIER','Alexandra'),
-(48,'RAHMOUNI','Yanis'),
-(49,'RAKOTOVAO','Ny-Harena'),
-(50,'RENARD','Houcine'),
-(51,'RICHARD','Loann'),
-(52,'SABATIER','Dorian'),
-(53,'SANDALI','Kawtar'),
-(54,'VAMPOUILLE','Paul'),
-(55,'VILCOT','Jérémy'),
-(56,'VILLE','Baptiste'),
-(57,'VOROBIEFF-NAWROT','Clément'),
-(58,'WAILLY','Kyllian'),
-(59,'ZAIMI','Oumayma'); 
-
+INSERT INTO `etudiants` (`id`, `prenom`, `nom`) VALUES
+(1 ,'Yousra','ABOUSITRE'),
+(2 ,'Lounès','AMICHI'),
+(3 ,'Rayane','AYARI'),
+(4 ,'Mohamed Othman','BAZEGA'),
+(5 ,'Jean-Baptiste','BELOT'),
+(6 ,'Merwane','BENBOUZIANE'),
+(7 ,'Adrien','BERNARD'),
+(8 ,'Louis','BLONDEL'),
+(9 ,'Arthur','BOBEUF'),
+(10,'Milo','BONASERA'),
+(11,'Evan','BOSTYN'),
+(12,'Rim','BOUKHACHANE'),
+(13,'Mathis','BOURGUIGNON'),
+(14,'Quentin','BOUTILLIER'),
+(15,'David','BRASSEUR'),
+(16,'Hugo','BRIOT'),
+(17,'Arthus','CAILLAUX'),
+(18,'Cedric','CALOIN'),
+(19,'Marin','CANIS'),
+(20,'Louis','CHALON'),
+(21,'Raphaël','CLEUET'),
+(22,'Lucie','DECOCK'),
+(23,'Alix','DE HERDT'),
+(24,'Lara','DEHILES'),
+(25,'Clément','DEMANDRE'),
+(26,'Erine','DEMOUTIEZ'),
+(27,'Julian','DENIER'),
+(28,'Noé','DEVIGNES'),
+(29,'Florian','DHOUAILLY'),
+(30,'Noam','DOMAIN'),
+(31,'Naim','EL BOUIHI'),
+(32,'Chloé','FEUGERE'),
+(33,'Lucas','HOURRIEZ'),
+(34,'Matthieu','HUART'),
+(35,'Elisabeth','LALOUX'),
+(36,'Théo','LAMOTTE'),
+(37,'Lucas','LEFEBVRE'),
+(38,'Baptiste','LEGRIX'),
+(39,'Paul','LEPLUS'),
+(40,'Thomas','LESIEUR'),
+(41,'Tom','MAGNIEZ'),
+(42,'Noha','MAKHLOUFI'),
+(43,'Gabin','MALINOWSKI'),
+(44,'Eléa','MUTNIK'),
+(45,'Raphaël','NAUZE'),
+(46,'Timéo','NUNEZ --FRAPPÉ'),
+(47,'Ilyas','OUTALEB'),
+(48,'Jean-Baptiste','PASSCHIER'),
+(49,'Florian','PLUCINSKI'),
+(50,'Hugo','POHL'),
+(51,'Guillaume','POLOWCZYK'),
+(52,'Maxence','ROATTA'),
+(53,'Thomas','SINAGRA'),
+(54,'Maxime','SZLASKI'),
+(55,'Antoine','TAISNE'),
+(56,'Mathis','THIEFFRY'),
+(57,'Clément','TRICQUENEAUX'),
+(58,'Matisse','VANWAELSCAPPEL--TRICQUET'),
+(59,'Hugo','WASSON'),
+(60,'Gabriel','WODEY');
 
 
 
@@ -126,6 +126,66 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
