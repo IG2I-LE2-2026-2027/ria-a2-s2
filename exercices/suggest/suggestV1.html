@@ -31,7 +31,7 @@ Il y en a déjà dans le sous-répertoire ressources
 	left:0;
 	top:25px;
 	width:299px;
-	
+	display:none;
 }
 #suggestions li {
 	display:block;
@@ -46,6 +46,7 @@ Il y en a déjà dans le sous-répertoire ressources
 </style>
 
 <script src="js/utils.js"></script>
+<script src="js/ajax.js"></script>
 <script>
 
 var lastContent=""; 
@@ -56,6 +57,7 @@ function annuler(contexte) {
 	if (contexte.code == "Escape") {
 		hide("suggestions");
 		val("saisie","");
+		hide("imgLoad");
 	}
 }
 
@@ -70,6 +72,12 @@ function saisir() {
 		show("imgLoad"); 
 		// on cache les précédentes suggestions 
 		hide("suggestions");
+		
+		// AJAX !!
+		ajax({
+			url : "fixture.php", 
+			callback : integrer
+		}); 
 	}
 	
 	
@@ -78,6 +86,12 @@ function saisir() {
 	}
 
 	lastContent = contenu;
+}
+
+function integrer (repAIntegrer) {
+	html("suggestions", repAIntegrer); 
+	show("suggestions"); 
+	hide("imgLoad");
 }
 
 function choisir(contexte) {
