@@ -1,0 +1,64 @@
+<!-- V1 : structure, présentation 
+Cf. https://loading.io/#editor pour des gif animés stylés
+Il y en a déjà dans le sous-répertoire ressources
+--> 
+
+<head>
+<style>
+/* presentation */
+#conteneur {
+	position:relative;
+	display:inline;
+}
+#imgLoad {
+	position:absolute;
+	right:5px;
+	top:2px;
+}
+#saisie {
+	width:300px;height:30px;
+	border:1px solid black;
+	outline:none;
+	padding-right:30px;
+}
+#suggestions {
+	position:absolute;
+	border:1px solid black;
+	border-top:0px;
+	padding:0;
+	margin:0;
+	left:0;
+	top:25px;
+	width:299px;
+}
+#suggestions li {
+	display:block;
+	padding:5px;
+}
+
+#suggestions li:hover{
+	background-color:lightgrey;
+	cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+<!-- structure --> 
+
+Du texte ... 
+<div id="conteneur">
+	<input type="text" id="saisie"/>
+	<img id="imgLoad" src="ressources/ajaxLoader.gif" />
+	<ul id="suggestions">
+		<li>Thibault</li>
+		<li>Thimoth&eacute;e</li> 
+		<li>Thomas</li>
+	</ul>
+</div>
+</body>
+
+
+
+
