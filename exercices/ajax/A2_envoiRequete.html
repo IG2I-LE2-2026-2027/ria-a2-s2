@@ -1,3 +1,5 @@
+<script src="utils.js"> </script>
+
 <script type="text/javascript">
 
 var request = false;
@@ -30,7 +32,8 @@ function traiteReponse()
 	{
 	    if (request.status == 200) 
 	    {
-			reponse = request.responseText;
+				reponse = request.responseText;
+				html("reponse", reponse);
 	    }
 	}
 } 
@@ -38,15 +41,21 @@ function traiteReponse()
 function envoyer(refBtn)
 {
 	var refCle = document.getElementById("cle");
-	var type;
-
+	/*
+	var type = 'POST';
+	if (val(refBtn) == "envoi GET") type = 'GET';  
+	*/
+	
+	var type = (val(refBtn) == "envoi GET") ? 'GET' : 'POST'; 
+	var donnees = "cle=" + refCle.value;
+	envoiRequete(type,"A2_data.php",donnees,traiteReponse);
 }
 
 </script>
 
 <input type="text" id="cle"/>
-<input type="button" value="envoi GET"/>
-<input type="button" value="envoi POST"/>
+<input type="button" value="envoi GET" onclick="envoyer(this)"/>
+<input type="button" value="envoi POST" onclick="envoyer(this)"/>
 
 <div id="reponse">
 </div>
