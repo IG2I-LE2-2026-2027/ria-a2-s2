@@ -8,7 +8,9 @@ A faire pour le TP3 :
 
 --- 
 
-TP3 : AJAX
-
+A faire pour le TP4 :
+- mettre en place une vraie couche information à l'aide du fichier data.php
+- la page data.php doit suggérer les étudiants dont le nom OU le prénom commence par le texte fourni
+- connecter l'interface suggest à cette couche information
 
 
