@@ -49,6 +49,31 @@ function envoyer(refBtn)
 	var type = (val(refBtn) == "envoi GET") ? 'GET' : 'POST'; 
 	var donnees = "cle=" + refCle.value;
 	envoiRequete(type,"A2_data.php",donnees,traiteReponse);
+	
+	// nature des arguments : string+objet ou seulement objet 
+	// => typeof sur 1er argument 
+	
+	// créer un objet contenant les valeurs par défaut 
+	// => enrichir() 
+	
+	// parcourir les données : 
+	// => for (nom in data) s+= nom +"=" + data[nom] + "&"
+	
+	// penser à faire une closure pour enfermer l'objet request dans la callbak onreadystatechange
+	
+	ajax ("A2_data.php", {
+		// type : "GET ou POST",
+		data : {cle : refCle.value, ... }, 
+		callback : function (repServeur) {...} 
+	}); 
+	
+	ajax ({
+		url : "A2_data.php", 
+		// type : "GET ou POST",
+		data : {cle : refCle.value}, 
+		callback : function (repServeur) {...}
+	}); 
+	
 }
 
 </script>
