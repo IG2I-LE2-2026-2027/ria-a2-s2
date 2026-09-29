@@ -38,6 +38,91 @@ function traiteReponse()
 	}
 } 
 
+
+// fonction enrichir(oDefaut,oModif) qui renvoie un nouvel objet en ayant complété les propriétés absentes de l’objet de configuration par les valeurs de l’objet par défaut.
+// Version mise à jour : oModif peut être undefined
+function enrichir(oDefault,oModif) {
+	var res = {}; 
+	for (prop in oDefault) {
+		if ( (oModif!= undefined) && (oModif[prop] != undefined) ) 
+			res[prop] = oModif[prop]; 
+		else res[prop] = oDefault[prop];
+	}
+	return res; 
+}
+
+var oDefault = {
+	type: "GET", 
+	callback : function(s){console.log(s);}, 
+	url : false, 
+	data : {}
+}; 
+
+// créer un objet contenant les valeurs par défaut 
+// => enrichir() 
+
+function ajax (urlOrParams, oParams) {
+	// penser à faire une closure pour enfermer l'objet request dans la callbak onreadystatechange
+	
+	// var locales !!
+	var request =  new XMLHttpRequest(); 
+	var oConfig; 
+	var donnees = ""; 
+	
+	// nature des arguments : string+objet ou seulement objet 
+	// => typeof sur 1er argument 
+	if (typeof urlOrParams == "object") {
+		// rien à faire : on a tout dans le premier argument 
+		// on le renomme juste oParams
+		oConfig = enrichir(oDefault,urlOrParams);
+	} else {
+		// l'url est dans le premier argument, 
+		// les données dans le second 
+		// on place l'url dans le second argument - qui peut ne pas exister ! 
+		oConfig = enrichir(oDefault,oParams);
+		// enrichir doit prévoir le cas où oParams est undefined !
+		oConfig.url = urlOrParams; 
+	}
+	
+	console.log(oConfig); 
+	
+	for( nomCle in oConfig.data) {
+		donnees += nomCle + "=" + oConfig.data[nomCle] + "&";
+	}
+	// NB : il y aura un & à la fin mais ce n'est pas une erreur 
+	
+		
+	if (oConfig.type=='GET') 
+	{
+		request.open("GET", oConfig.url+"?"+donnees, true);
+		donnees=null;
+	}
+	else 
+	{
+		request.open("POST", oConfig.url, true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	}
+
+	request.onreadystatechange = function(){
+		// Cette fonction est la vraie fonction de rappel de l'objet request
+		// Elle enferme dans son scope l'objet request
+		// ce qui nous permet de récupérer les données 
+		// et de les passer à la callback utilisateur 
+		if (request.readyState == 4) 
+		{
+			  if (request.status == 200) 
+			  {
+					reponse = request.responseText;
+					// Elle a aussi oConfig dans son scope !!
+					oConfig.callback(reponse);
+			  }
+		}
+	};
+	
+	request.send(donnees);
+	
+}
+
 function envoyer(refBtn)
 {
 	var refCle = document.getElementById("cle");
@@ -46,32 +131,27 @@ function envoyer(refBtn)
 	if (val(refBtn) == "envoi GET") type = 'GET';  
 	*/
 	
+	/*
 	var type = (val(refBtn) == "envoi GET") ? 'GET' : 'POST'; 
 	var donnees = "cle=" + refCle.value;
 	envoiRequete(type,"A2_data.php",donnees,traiteReponse);
-	
-	// nature des arguments : string+objet ou seulement objet 
-	// => typeof sur 1er argument 
-	
-	// créer un objet contenant les valeurs par défaut 
-	// => enrichir() 
-	
-	// parcourir les données : 
-	// => for (nom in data) s+= nom +"=" + data[nom] + "&"
-	
-	// penser à faire une closure pour enfermer l'objet request dans la callbak onreadystatechange
-	
+	*/
+
 	ajax ("A2_data.php", {
-		// type : "GET ou POST",
-		data : {cle : refCle.value, ... }, 
-		callback : function (repServeur) {...} 
+		//type : "GET",
+		data : {cle : refCle.value}, 
+		//callback : function (repServeur) {
+		//	html("reponse", "1" + repServeur);
+		//} 
 	}); 
 	
 	ajax ({
 		url : "A2_data.php", 
-		// type : "GET ou POST",
+		//type : "POST",
 		data : {cle : refCle.value}, 
-		callback : function (repServeur) {...}
+		callback : function (repServeur) {
+			html("reponse", html("reponse") + "2" +  repServeur);
+		}
 	}); 
 	
 }
