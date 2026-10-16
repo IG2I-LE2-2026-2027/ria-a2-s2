@@ -90,9 +90,40 @@ function saisir() {
 }
 
 function integrer (repAIntegrer) {
-	// Les données sont au format JSON : 
+	// V3 : Les données sont au format JSON : 
 	// il faut les parcourir pour les afficher 
-	html("suggestions", repAIntegrer); 
+	var i; 
+	console.log(repAIntegrer);
+	var oJSON = JSON.parse(repAIntegrer);
+	console.log(oJSON);
+	
+	/*
+	{
+    "suggestions": [
+        {
+            "prenom": "Théo",
+            "nom": "LAMOTTE",
+            "id": "36 "
+        },
+        {
+            "prenom": "Thomas",
+            "nom": "LESIEUR",
+            "id": "40 "
+        }
+    ],
+    "debutNom": "T"
+}
+	*/
+	var sHTML = ""; 
+	for(i=0;i<oJSON.suggestions.length;i++) {
+		sHTML += "<li>" 
+					+ oJSON.suggestions[i].prenom.substr(0,1)
+					+ ". "
+					+ oJSON.suggestions[i].nom
+					+ "</li>";
+	}
+	
+	html("suggestions", sHTML); 
 	show("suggestions"); 
 	hide("imgLoad");
 }
@@ -109,7 +140,7 @@ function choisir(contexte) {
 <body onkeyup="annuler(event)">
 <!-- structure --> 
 
-V2 : Du texte ... 
+V3 : Du texte ... 
 <div id="conteneur">
 	<input type="text" id="saisie" onkeyup="saisir()"/>
 	<img id="imgLoad" src="ressources/ajaxLoader.gif" />
