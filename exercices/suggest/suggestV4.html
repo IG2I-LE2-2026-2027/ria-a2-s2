@@ -1,0 +1,155 @@
+<!-- V1 : structure, présentation 
+Cf. https://loading.io/#editor pour des gif animés stylés
+Il y en a déjà dans le sous-répertoire ressources
+--> 
+
+<head>
+<style>
+/* presentation */
+#conteneur {
+	position:relative;
+	display:inline;
+}
+#imgLoad {
+	position:absolute;
+	right:5px;
+	top:2px;
+	display:none;
+}
+#saisie {
+	width:300px;height:30px;
+	border:1px solid black;
+	outline:none;
+	padding-right:30px;
+}
+#suggestions {
+	position:absolute;
+	border:1px solid black;
+	border-top:0px;
+	padding:0;
+	margin:0;
+	left:0;
+	top:25px;
+	width:299px;
+	display:none;
+}
+#suggestions li {
+	display:block;
+	padding:5px;
+}
+
+#suggestions li:hover{
+	background-color:lightgrey;
+	cursor:pointer;
+}
+
+</style>
+
+<script src="js/utils.js"></script>
+<script src="js/ajax.js"></script>
+<script>
+
+var lastContent=""; 
+
+// interaction 
+function annuler(contexte) {
+	//console.log(contexte); 
+	if (contexte.code == "Escape") {
+		hide("suggestions");
+		val("saisie","");
+		hide("imgLoad");
+	}
+}
+
+function saisir() {
+	console.log("texte : " + val("saisie"));
+	var contenu = val("saisie"); 
+	
+	if ((contenu != "") && (contenu != lastContent)) {
+		// si champ non vide 
+		// ET qu'il a été modifié 
+		// on affiche l'image de chargement
+		show("imgLoad"); 
+		// on cache les précédentes suggestions 
+		hide("suggestions");
+		
+		// AJAX !!
+		ajax({
+			url : "data_bdd.php", 
+			data : {debutNom : contenu}, 
+			callback : integrer
+		}); 
+	}
+	
+	
+	if (contenu == "") {
+		hide("imgLoad"); 
+	}
+
+	lastContent = contenu;
+}
+
+function integrer (repAIntegrer) {
+	// V5 : On suggère P. NOM 
+	// On clique en affichant Prenom N. (id) 
+	// ==> Mettre en place un cache qui stocke les données des suggestions 
+	var i; 
+	console.log(repAIntegrer);
+	var oJSON = JSON.parse(repAIntegrer);
+	console.log(oJSON);
+	
+	/*
+	{
+    "suggestions": [
+        {
+            "prenom": "Théo",
+            "nom": "LAMOTTE",
+            "id": "36 "
+        },
+        {
+            "prenom": "Thomas",
+            "nom": "LESIEUR",
+            "id": "40 "
+        }
+    ],
+    "debutNom": "T"
+}
+	*/
+	var sHTML = ""; 
+	for(i=0;i<oJSON.suggestions.length;i++) {
+		sHTML += "<li>" 
+					+ oJSON.suggestions[i].prenom.substr(0,1)
+					+ ". "
+					+ oJSON.suggestions[i].nom
+					+ "</li>";
+	}
+	
+	html("suggestions", sHTML); 
+	show("suggestions"); 
+	hide("imgLoad");
+}
+
+function choisir(contexte) {
+	//console.log(contexte); 
+	val("saisie", html(contexte.target));
+	hide("suggestions");
+}
+
+</script>
+</head>
+
+<body onkeyup="annuler(event)">
+<!-- structure --> 
+
+V4 : Du texte ... 
+<div id="conteneur">
+	<input type="text" id="saisie" onkeyup="saisir()"/>
+	<img id="imgLoad" src="ressources/ajaxLoader.gif" />
+	<ul id="suggestions" onclick="choisir(event)">
+	</ul>
+</div>
+</body>
+
+
+
+
